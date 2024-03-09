@@ -1,40 +1,34 @@
-const StatusMessage = ({ winner, gamingBoard }) => {
-  const { squares, isXNext } = gamingBoard;
-  const noMovesLeft = squares.every(squareValue => squareValue !== null);
-  const nextPlayer = isXNext ? 'X' : 'O';
+import React from 'react';
 
-  const renderStatusMessage = () => {
-    if (winner) {
-      return (
+const StatusMessage = ({ winner, current }) => {
+  const noMovesLeft = current.board.every(el => el !== null);
+
+  return (
+    <div className="status-message">
+      {winner && (
         <>
           Winner is{' '}
           <span className={winner === 'X' ? 'text-green' : 'text-orange'}>
             {winner}
           </span>
         </>
-      );
-    }
-    if (!winner && noMovesLeft) {
-      return (
-        <>
-          <span className="text-orange">O</span> and{' '}
-          <span className="text-green">X</span> tied
-        </>
-      );
-    }
-    if (!winner && !noMovesLeft) {
-      return (
+      )}
+      {!winner && !noMovesLeft && (
         <>
           Next player is{' '}
-          <span className={isNext ? 'text-green' : 'text-orange'}>
-            {nextPlayer}
+          <span className={current.isXNext ? 'text-green' : 'text-orange'}>
+            {current.isXNext ? 'X' : 'O'}{' '}
           </span>
         </>
-      );
-    }
-    return null;
-  };
-
-  return <div className="status-message">{renderStatusMessage}</div>;
+      )}
+      {!winner && noMovesLeft && (
+        <>
+          <span className="text-green">X</span> and{' '}
+          <span className="text-orange">O</span> tied
+        </>
+      )}
+    </div>
+  );
 };
+
 export default StatusMessage;
