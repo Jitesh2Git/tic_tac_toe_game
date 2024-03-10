@@ -21,7 +21,9 @@ const App = () => {
     }
 
     setHistory(prev => {
-      const last = prev[prev.length - 1];
+      const isTraversing = currentMove + 1 !== prev.length;
+
+      const last = isTraversing ? prev[currentMove] : prev[prev.length - 1];
 
       const newBoard = last.board.map((square, pos) => {
         if (pos === position) {
@@ -30,8 +32,9 @@ const App = () => {
 
         return square;
       });
+      const base = isTraversing ? prev.slice(0, prev.indexOf(last) + 1) : prev;
 
-      return prev.concat({ board: newBoard, isXNext: !last.isXNext });
+      return base.concat({ board: newBoard, isXNext: !last.isXNext });
     });
 
     setCurrentMove(prev => prev + 1);
