@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Tic Tac Toe game
 
-For DEMO Click Here - https://gametic-tac-toe.surge.sh/
+FOR DEMO Click HERE - https://gametic-tac-toe.surge.sh/
